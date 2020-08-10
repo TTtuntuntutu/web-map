@@ -22,7 +22,7 @@
 
 [Using HTML sections and outlines](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Using_HTML_sections_and_outlines)
 
-Sections Elements：
+Section Elements：
 
 - `<nav>` ：提供导航链接，常见示例是菜单、目录、索引
   - 不用把所有链接都放在`<nav>`标签内，`<nav>`标签应该专注**主要的导航链接块**，比如一般`<footer>`元素内会有链接而不用包`<nav>`标签
@@ -41,7 +41,9 @@ Sections Elements：
 - `<aside>` ：是文档的一部分，但是是与文档主要内容间接相关的，**比如广告、注释**
   - 不在`<aside>`内嵌`<aside>`
 
-其他的Section elements：
+
+
+Other Semantic HTML elements used in Sectioning：
 
 - `<body>`：包含所有内容
 - `<header>`
@@ -140,19 +142,77 @@ Form相关：
 
 
 
+## content categories: 标签分类
+
+每个元素可能处于0、1、n个内容分类中，在同一个内容分类中的元素享有相同的行为、受相关规则限制。
+
+
+
+![HTML标签分类](../Immagine/HTML标签分类.png)
+
+
+
+有3大分类：
+
+- Main content categories
+  - Metadata content：描述页面的元数据，比如 `<link>`、`<meta>`、`<script>`、`<style>`、`<title>`等；
+  - Flow content：通常包括文本或者嵌入式内容，比较细节的内容；
+  - Sectioning content：比如`<article>`、`<aside>`、`<nav>`、`<section>`，下面详细解释
+  - Heading content：定义标题，比如`h1~h6`、`<hgroup>`
+  - phrasing content：文本、标记，对标HTML4的inline content
+  - Embedded content：嵌入的内容会导入另一种资源，比如`<canvas>`、`<iframe>`等
+  - Interactive content：和用户交互相关，比如`<button>`、`<a>`等
+  - Palpable content：可感知的节点，渲染出来的
+- Form-related content categories
+- Specific content categories, sometimes only in a specific context
+
+
+
+### Sectioning content
+
+和[规范中的outline](https://html.spec.whatwg.org/multipage/sections.html#outline)关联，outline指的是大纲，而Sectioning content的作用是会在这个大纲中创立一个节点。这个节点在整个文档中是有实际意义的，它也定义了`<header>`、`<footer>` 、heading content的范围。它包括`<article>`、`<aside>`、`<nav>`、`<section>`，比如：
+
+```html
+<body>
+   <nav>
+    <p><a href="/">Home</a></p>
+   </nav>
+   <p>Hello world.</p>
+   <aside>
+    <p>My cat is cute.</p>
+   </aside>
+</body>
+```
+
+建立的大纲就是：
+
+1. Untitled document
+   1. Navigation
+   2. Sidebar
+
+这个建立的大纲就会被许多可获取设备、浏览器提供的reader views用到。
+
+**但是：这一点并没有得到实现**
+
+> **Important**: There are no implementations of the proposed outline algorithm in web browsers nor assistive technology; it was never part of a final W3C specification. Therefore the [outline](https://www.w3.org/TR/html5/sections.html#outline) algorithm *should not be used* to convey document structure to users. **Authors are advised to use heading [rank](https://www.w3.org/TR/html5/sections.html#rank) (`h1`-`h6`) to convey document structure.**
+
+
+
+### 宽容的HTML5
+
+[mdn-heading elements](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Heading_Elements)：
+
+![heading-elements](../Immagine/heading-elements.png)
+
+在`<h1>`里面放不是Phrasing content的`<section>`，也是可以正常渲染。
+
+
+
 ## 进一步 研究内容
 
 ### HTML5提供的能力
 
 ### HTML5标准的发展
-
-- [ ] mdn搜索出来的一大框框是什么
-
-- [x] 规范是如何推进的，迭代的频率
-
-
-
-HTML5标准的发展：
 
 目前是WHATWG和W3C两个组织在联合发展HTML5，主要的文档在WHATWG，这中间有曲曲折折好多故事：[知乎-HTML5发展简史](https://zhuanlan.zhihu.com/p/44164232)；
 
@@ -183,9 +243,9 @@ HTML5 Living Standard演进的节奏在WHATWG FAQ有提到：
 
 
 
-扫描标签后，其实标签本身的使用，是参照说明书的搬运工作，不具有技术门槛。所以**了解HTML提供的能力（而不是逐文档阅读）**、关注**标准是如何推进的**（即功能是如何加出来的）、**在使用之上有哪些探索的可能性**是关键的
+扫描标签后，其实标签本身的使用，是参照说明书的搬运工作，不具有技术门槛。所以**了解HTML提供的能力（而不是逐文档阅读）**、关注**标准是如何推进的**（即功能是如何加出来的）、**在使用之上有哪些探索的可能性**是关键的。
 
-
+  
 
 ## 链接
 
