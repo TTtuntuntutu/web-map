@@ -15,7 +15,19 @@
 
 
 
-尺子丈量出来的**常见类型**：
+在每个维度下，尺子**丈量4种行为**：Accessing、Searching、Inserting、Deleting。
+
+举个时间复杂度的例子：
+
+|      |  Accessing    |   Searching   |   Inserting   |   Deleting   |
+| ---- | ---- | ---- | ---- | ---- |
+|   Array   |   O(1)    | O(N) | O(N) | O(N) |
+| Linked List | O(N) | O(N) | O(1) | O(1) |
+| Binary Search Tree | O(log N) | O(log N) | O(log N) | O(log N) |
+
+
+
+尺子丈量出来的**常见结果**：
 
 | Name         | Notation   | How you feel when they show up at your party |
 | ------------ | ---------- | -------------------------------------------- |
@@ -29,27 +41,16 @@
 
 
 
-在每个维度下，尺子**丈量4种行为**：Accessing、Searching、Inserting、Deleting。
-
-举个时间复杂度的例子：
-
-|      |  Accessing    |   Searching   |   Inserting   |   Deleting   |
-| ---- | ---- | ---- | ---- | ---- |
-|   Array   |   O(1)    | O(N) | O(N) | O(N) |
-| Linked List | O(N) | O(N) | O(1) | O(1) |
-| Binary Search Tree | O(log N) | O(log N) | O(log N) | O(log N) |
-
-
-
-
 
 ## Real Example
 
-接下来这些耳熟能详的数据结构，其实是建立在一定基础上（这个基础就是直接操作内存的）。它们更像成品，了解它们**能解决什么问题、适合解决什么问题**，优先级高于如何实现、如何评估。
+接下来这些耳熟能详的数据结构，其实是建立在一定基础上（这个基础就是直接操作内存的）。它们更像成品，了解它们 **能解决什么问题、适合解决什么问题，优先级高于如何实现、如何评估**。
 
 
 
-### Stack
+### 线性数据结构
+
+#### Stack
 
 栈：数据有序，后进先出
 
@@ -85,9 +86,7 @@ class Stack {
 }
 ```
 
-
-
-### Queue
+#### Queue
 
 队列：先进先出
 
@@ -122,89 +121,7 @@ class Queue {
 - 这里使用list/array去实现Queue，因为`arr#shift`，所以`dequeue`时间复杂度是`O(n)`
 - 如果使用Linked List去实现，那么`enqueue`、`dequeue`、`peek` 的时间复杂度都是`O(1)`
 
-
-
-
-
-### Graph
-
-图：由节点和连接线组成，一个节点指向另一个节点
-
-
-
-伪代码表示：
-
-```javascript
-//单个节点
-Node {
-  value: ...,
-  lines: [(Node), (Node), ...]
-}
-
-//整个图
-Graph {
-	nodes: [
-    Node {...},
-    Node {...},
-    ...
-	]
-}
-```
-
-
-
-简单实现：
-
-```javascript
-class Graph {
-    constructor() {
-        this.nodes = [];
-    }
-
-  	//O(1)
-    addNode(value) {
-        return this.nodes.push({
-            value,
-            lines: []
-        });
-    }
-
-  	//O(n)
-    find(value) {
-        return this.nodes.find(node => {
-            return node.value === value;
-        });
-    }
-
-  	//O(n)
-    addLine(startValue, endValue) {
-        let startNode = this.find(startValue);
-        let endNode = this.find(endValue);
-
-        if (!startNode || !endNode) {
-            throw new Error('Both nodes need to exist');
-        }
-
-        startNode.lines.push(endNode);
-    }
-}
-```
-
-
-
-图的 **使用场景** 很广泛，简单来说都是顺着指向线过滤想要的信息：
-
->  Tons of things can be represented this way, users with friends, the 800
->
->  transitive dependencies in a node_modules folder, the internet itself is a
->
->   graph of webpages connected together by links.
-
-
-
-
-
-### Linked List
+#### Linked List
 
 链表：线性集合，顺序不由内存中的物理位置确定，而是每一个元素指向下一个元素
 
@@ -279,7 +196,73 @@ class LinkedList {
 
 
 
-### Tree
+### 树型数据结构
+
+#### Graph
+
+图：由节点和连接线组成，一个节点指向另一个节点
+
+
+
+伪代码表示：
+
+```javascript
+//单个节点
+Node {
+  value: ...,
+  lines: [(Node), (Node), ...]
+}
+
+//整个图
+Graph {
+	nodes: [
+    Node {...},
+    Node {...},
+    ...
+	]
+}
+```
+
+
+
+简单实现：
+
+```javascript
+class Graph {
+    constructor() {
+        this.nodes = [];
+    }
+
+  	//O(1)
+    addNode(value) {
+        return this.nodes.push({
+            value,
+            lines: []
+        });
+    }
+
+  	//O(n)
+    find(value) {
+        return this.nodes.find(node => {
+            return node.value === value;
+        });
+    }
+
+  	//O(n)
+    addLine(startValue, endValue) {
+        let startNode = this.find(startValue);
+        let endNode = this.find(endValue);
+
+        if (!startNode || !endNode) {
+            throw new Error('Both nodes need to exist');
+        }
+
+        startNode.lines.push(endNode);
+    }
+}
+```
+
+#### Tree
 
 树是一种特殊的图，这种特殊在于树是没有环的。
 
@@ -346,9 +329,9 @@ tree的简单实现：
 
 
 
-### Binary search trees
+#### Binary search trees
 
-二叉搜索树：节点右边值比它大、节点左边值比它小，且值唯一
+二叉搜索树：节点所有右边值比它大、节点所有左边值比它小，且值唯一
 
 
 
@@ -425,30 +408,30 @@ class BinarySearchTree {
 
 二叉搜索树操作的时间复杂度：
 
-![Binary-search-tree-tc](/immagine/Binary-search-tree-tc.png)
+![Binary-search-tree-tc](/Risorse/Binary-search-tree-tc.png)
 
 
 
-## 印象深刻
+## 小结
 
-tree的`traverse`函数也仅仅是一个递归调用：
+1. tree的 `traverse` 函数非常重要，有了它才可以做很多事情，比如AST的遍历，但归根到底，它也不过是一个递归调用函数：
 
-```javascript
-class Tree {
- 	traverse(callback) {
-    function walk(node) {
-      callback(node);
-      node.children.forEach(walk);
-    }
+   ```javascript
+   class Tree {
+    	traverse(callback) {
+       function walk(node) {
+         callback(node);
+         node.children.forEach(walk);
+       }
+   
+       walk(this.root);
+     }
+   }
+   ```
 
-    walk(this.root);
-  }
-}
-```
+2. (这一节没细致讨论数据结构的优缺点和适用场景，但这一点要明确) 相比于array/lis物理位置的线性数据，**链表的优点在于首末尾的插入、删除操作，而树的优点在于查询、搜索**
 
 
-
-相对于array/list线性数据，链表的优点在于首末尾的插入、删除操作，而树的优点在于查询、搜索。
 
 
 
