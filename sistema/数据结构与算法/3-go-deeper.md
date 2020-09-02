@@ -1,3 +1,18 @@
+##  Linked List
+
+链表的优劣往往是和数组比较的。
+
+优势：
+
+1. 首末尾的插入和删除操作 O(1) => **链表被用来实现栈、队列**
+
+劣势：
+
+1. 任意位置的插入和删除，因为首先要进行access操作，时间复杂度是 O(n) ，和数组是一样的；
+2. 获取、搜索元素，时间复杂度是 O(n)，因为它需要遍历链表才能拿到地址，而数组可以直接拿到链接，时间复杂度是 O(1)；
+3. 数组有更好的 cache locality([What is meant by cache locality of arrays](https://www.quora.com/What-is-meant-by-cache-locality-of-arrays))，这帮助在同样知道地址的情况下，数组能更快拿到地址对应的数据。
+
+
 ## Graph
 
 图在数学中的表示：
