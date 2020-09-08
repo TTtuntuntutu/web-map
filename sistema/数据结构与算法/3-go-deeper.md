@@ -24,6 +24,27 @@
 
 队列和栈是**限定了操作**的**线性顺序**的抽象数据类型
 
+## Heap
+
+堆是一种特殊的树型数据结构。**它一定是这一层的节点从左往右排满后，才会进入下一层**。
+
+它有Max Heap、Min Heap两种类型，要求上下层的大小关系，其中Max Heap中value(根节点)>=value(子节点)，而不要求左右节点值的顺序。Min Heap是<=的关系。
+
+![max-heap](/Risorse/max-heap.png)
+
+![min-heap](/Risorse/min-heap.png)
+
+堆的实现比较复杂，它用数组作为堆的数据容器，利用数组的index来实现堆的层级结构，使得表达基于树的数据结构（节点对应的数组序号从根节点往下递增），。在插入时候要和根节点去比较大小，在删除时得分情况判断是和根节点比较、还是和子节点比较，关键的函数是 `heapifyUp` 和 `heapifyDown` 。
+
+
+
+## Hash Table
+
+一般数据结构，对应key的value可以直接拿到，而hash table在中间还有buckets一层。
+
+Hash Table得处理碰撞的情况。
+
+
 ## Graph
 
 图在数学中的表示：
