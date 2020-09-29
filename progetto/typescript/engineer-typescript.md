@@ -71,6 +71,8 @@ https://www.robertcooper.me/using-eslint-and-prettier-in-a-typescript-project
 
 tsconfig的配置多如牛毛，不可在文档中看死，唯有在实践中认知。
 
+这篇文章整理不错: [理解 Typescript 配置文件](https://segmentfault.com/a/1190000013514680)
+
 
 
 ### linter checks
