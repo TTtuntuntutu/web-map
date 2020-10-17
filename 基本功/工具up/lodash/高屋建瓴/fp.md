@@ -1,12 +1,6 @@
-FP 有哪些特点
-
-价值、哪些优点：easy to read, debug and refactor
-
-哪些缺点
-
-FP 的实践
 
 
+## 特点
 
 > JavaScript is a multi-paradigm language that allows you to freely mix  and match object-oriented, procedural, and functional paradigms. 
 
@@ -90,7 +84,7 @@ $(f ∘ g)(x) = f(g(x))$
 比如求阶乘：$n! = n \* (n-1) \* (n-2) \* ... \* 1$
 
 ```javascript
-//循环实现
+//循环实现：典型的面向过程编程
 function iterativeFactorial(n) {
   let product = 1;
   for (let i = 1; i <= n; i++) {
@@ -120,4 +114,59 @@ function recursiveFactorial(n) {
 
 
 
-关于递归还有一个尾部调用优化（Tail Call Optimiztion/TCO），但貌似不太明确。
+关于递归还有一个话题：尾部调用优化（Tail Call Optimiztion/TCO），它对递归性能做了优化。
+但是它似乎经历了复杂的过程后走向了死亡：[Tail Call Optimization implementation in Javascript Engines](https://stackoverflow.com/questions/54719548/tail-call-optimization-implementation-in-javascript-engines)
+
+
+### Higher-order functions
+
+ return a function from a function
+
+
+
+### Curring
+
+native有原生的机制：
+
+```javascript
+function giveMe3(item1, item2, item3) {
+  return `
+    1: ${item1}
+    2: ${item2}
+    3: ${item3}
+  `;
+}
+
+const giveMe2 = giveMe3.bind(null, 'rock');
+const giveMe1 = giveMe2.bind(null, 'paper');
+const result = giveMe1('scissors');
+
+console.log(result);
+// 1: rock
+// 2: paper
+// 3: scissors
+```
+
+
+
+## 个人总结
+
+对FP的这些特点做一个抽象，可以总结为“一个方块的故事”。
+
+![](/assets/FP抽象.jpeg)
+
+如果说面向过程编程是傻瓜式的暴力求解，面向对象编程是对现实世界真实的建模，那么函数式编程，是用抽象的思维找到干净的求解规律。
+
+
+
+优点/价值：easy to read, debug and refactor
+
+实践：Lodash/fp、ramda
+
+
+
+## 链接
+
+[An introduction to functional programming in JavaScript](https://opensource.com/article/17/6/functional-javascript)
+
+
