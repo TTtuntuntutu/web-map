@@ -159,7 +159,7 @@ console.log(result);
 
 
 
-优点/价值：easy to read, debug and refactor
+优点/价值：easy to read,debug,refactor and test
 
 实践：Lodash/fp、ramda
 
