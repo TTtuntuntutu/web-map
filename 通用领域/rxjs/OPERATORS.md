@@ -54,6 +54,19 @@ firstOrder.subscribe(x => console.log(x));
 
 
 
+### Filtering Operators
+
+#### 和时间相关
+
+在时间序列上，控制Observables冒出值，最终是否被冒出，这里有4组api。
+
+- `throttle`、`throttleTime`：节流的思想。“控制器”有disabled、enabled两种状态，disabled状态时允许冒出值，enabled状态时不允许冒出值。初始值为disabled，首次Observable冒出值，这个值被冒出，然后“控制器”进入enabled状态。如果是`throttleTime`，在这个指定的时间值后，“控制器”从enabled变回到disabled状态，又可以愉快地冒出值了；如果是`throttle`，durationSelector返回的Observable冒出值的时候，就状态变回到disabled。控制的逻辑不一样，但是都是有一段静默期；
+- `audit`、`auditTime`：和 throttle 很像，它的控制器也有两种状态，状态切换的逻辑也一样。但是它冒出的值是disabled状态时的最新值。所以说 throttle/throttleTime 冒出的是一个周期的第一个值，而 audit/auditTime 冒出的是一个周期的最后一个值；
+- `debounce`、`debounceTime`：防抖的思想。如果是`debounceTime` ，Observable冒出的值，必须扛过这段时候，才会被最终冒出；如果是`debounce`，必须扛到durationSelector返回的Observable冒出值，才最终冒出；
+- `sample`、`sampleTime`：隔一段时间、隔到durationSelector返回的Observable冒出值，取Observable冒出的最新值冒出；
+
+
+
 ### Error Handling Operators
 
 捕获错误 => 重试、抛出新的错误、抛出其他Observable
