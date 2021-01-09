@@ -193,3 +193,28 @@ operators 分两类：
 1. Pipeable Operator：允许被`source$.pipe(op1(),op2())`，不修改 input Observable，返回一个新的 output Observable，订阅 output Observable，也是订阅 input Observable；
 2. Creation Operator：创建 Observable；
 
+# Subject
+
+> *A Subject is like an Observable, but can **multicast** to many Observers. Subjects are like EventEmitters: they maintain a registry of many listeners.*
+
+1. 每个`Subject`是一个 `Observable`，所以可以正常订阅它。但是从 `Observer` 的角度，是不知道是 `Subject`，还是一般`Observable`；
+2. 每个`Subject`也是一个 `Observer`：Observable A => Subject => Multicast Observable，作为单播转为多播的媒介；
+
+
+
+真实使用：
+
+- 原生的subject；
+
+- multicast：加了一个开关的subject，开关需要手动 `multicasted.connect`；
+
+- multicast + opertator:refCounted：开关自动打开、关闭，根据订阅的observer数目；
+
+
+
+变体：
+
+- BehaviorSubject：存储最新值，每当一个新的订阅，它会被最新值触发一次；
+- RelaySubject：存储一串值（和BehaviorSubject类似，length可指定，还可以设置存储过期时间），每当一个新的订阅，它会被这串值触发；
+- AsyncSubject：只会被最后的值触发；
+

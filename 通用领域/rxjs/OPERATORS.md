@@ -56,7 +56,9 @@ firstOrder.subscribe(x => console.log(x));
 
 ### Filtering Operators
 
-#### 和时间相关
+最基本的过滤逻辑：`filter`；
+
+#### 过滤：和时间相关
 
 在时间序列上，控制Observables冒出值，最终是否被冒出，这里有4组api。
 
@@ -64,6 +66,26 @@ firstOrder.subscribe(x => console.log(x));
 - `audit`、`auditTime`：和 throttle 很像，它的控制器也有两种状态，状态切换的逻辑也一样。但是它冒出的值是disabled状态时的最新值。所以说 throttle/throttleTime 冒出的是一个周期的第一个值，而 audit/auditTime 冒出的是一个周期的最后一个值；
 - `debounce`、`debounceTime`：防抖的思想。如果是`debounceTime` ，Observable冒出的值，必须扛过这段时候，才会被最终冒出；如果是`debounce`，必须扛到durationSelector返回的Observable冒出值，才最终冒出；
 - `sample`、`sampleTime`：隔一段时间、隔到durationSelector返回的Observable冒出值，取Observable冒出的最新值冒出；
+
+#### 其他
+
+在一个Observables的过滤逻辑
+
+**从顺序上过滤**：取一个流中冒出数据的第n个，`elementAt`、`first`、`last`；
+
+**从一个节点过滤**：
+
+- **忽略数据**：`skip`、`skipLast`、`skipWhile`、`skipUntil`；
+- **取数据**：`take`、`takeLast`、`takeWhile`、`takeUntil`；
+
+**从数据唯一性过滤**：一个流中冒出的数据内的比较，`distinct`、`distinctUntilChanged`、`distinctUntilKeyChanged`
+
+其他：
+
+- `ignoreElements`：忽略所有值，仅响应完成；
+- `single`：多于一个值冒出就报错；
+
+
 
 
 
